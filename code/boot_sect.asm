@@ -1,26 +1,27 @@
-mov ah, 0x0e
+mov bx, 50
 
-mov bp, 0x8000
-mov sp, bp
+cmp bx, 4
+jle A
 
-push 'AB'
+cmp bx, 40
+jl B
 
-mov al, [0x7ffe]
-int 0x10
+mov al, 'C'
+jmp the_end
 
-mov al, [0x7fff]
-int 0x10
+A:
+    mov al, 'A'
+    jmp the_end
 
+B:
+    mov al, 'B'
+    jmp the_end
 
-pop bx
-mov al, bl
-int 0x10
+the_end:
+    mov ah, 0x0e
+    int 0x10
 
-mov al, bh
-int 0x10
-
-jmp $
+    jmp $
 
 times 510-($-$$) db 0
-
 dw 0xaa55
