@@ -1,27 +1,19 @@
-mov bx, 50
+org 0x7c00
 
-cmp bx, 4
-jle A
+mov bx, HELLO_MSG
+call print_string
 
-cmp bx, 40
-jl B
+mov bx, GOODBYE_MSG
+call print_string
 
-mov al, 'C'
-jmp the_end
+jmp $
 
-A:
-    mov al, 'A'
-    jmp the_end
+%include "print_string.asm"
 
-B:
-    mov al, 'B'
-    jmp the_end
-
-the_end:
-    mov ah, 0x0e
-    int 0x10
-
-    jmp $
+HELLO_MSG:
+    db 'Hello,World!',0
+GOODBYE_MSG:
+    db 'Goodbye!',0
 
 times 510-($-$$) db 0
 dw 0xaa55
