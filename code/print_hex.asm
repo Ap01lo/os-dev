@@ -1,7 +1,9 @@
 print_hex:
+; dx: The orignal hex address
+; bx: The adress of a series of ascii we will print
+;
 pusha
 mov ax, dx
-mov bx, HEX
 add bx, 5
 mov cx, 0
 

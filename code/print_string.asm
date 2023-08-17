@@ -1,4 +1,7 @@
 print_string:
+;
+; bx: the start address of string
+;
     pusha
     mov ah, 0x0e
 loop:
