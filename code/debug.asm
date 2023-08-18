@@ -4,16 +4,14 @@
 ;
 
 print_regs:
-    pusha
     call print_ax
     call print_bx
     call print_cx
     call print_dx
-    popa
     ret
 
 print_ax:   
-    push ax
+    pusha
     mov bx, ax_msg
     call print_string
 
@@ -23,12 +21,12 @@ print_ax:
     mov bx, change_line
     call print_string
 
-    pop ax
+    popa
     ret
 
 
 print_bx:   
-    push bx
+    pusha
 
     mov ax, bx,
     mov bx, bx_msg
@@ -40,11 +38,11 @@ print_bx:
     mov bx, change_line
     call print_string
 
-    pop bx
+    popa
     ret
 
 print_cx:   
-    push cx
+    pusha
     mov bx, cx_msg
     call print_string
 
@@ -54,22 +52,22 @@ print_cx:
     mov bx, change_line
     call print_string
 
-    pop cx
+    popa
     ret
 
 print_dx:   
-    push dx
+    pusha
     mov bx, dx_msg
     call print_string
 
-    mov dx, dx
     call print_hex
 
     mov bx, change_line
     call print_string
 
-    pop dx
+    popa
     ret
+
 ax_msg:
     db "ax = ",0
 bx_msg:
