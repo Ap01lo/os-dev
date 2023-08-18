@@ -1,9 +1,9 @@
 print_hex:
-; dx: The orignal hex address
-; bx: The adress of a series of ascii we will print
-;
+; dx: The orignal hex value
+
 pusha
 mov ax, dx
+mov bx, HEX_ADDRESS
 add bx, 5
 mov cx, 0
 
@@ -33,7 +33,10 @@ to_lower:
     ret
 
 print_h:
-    mov bx, HEX
+    mov bx, HEX_ADDRESS
     call print_string
 popa
 ret
+
+HEX_ADDRESS:
+    db '0x1200'
