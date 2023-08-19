@@ -19,17 +19,33 @@ disk_load:
     mov ch, 0x00            ; 第0个磁道
     mov dh, 0x00            ; 磁头
     mov cl, 0x02            ; 第二块
-    int 0x13                ; 执行中断命令读取磁盘数据
-
-    jc DISK_ERROR           ; 当标志寄存器cf置位时，说明没有成功加载，跳到报错
     
+    ; call print_regs
+    int 0x13                ; 执行中断命令读取磁盘数据
+    ; call print_regs
+
+    jc DISK_ERROR_1           ; 当标志寄存器cf置位时，说明没有成功加载，跳到报错
+    
+    pop dx
+    ; call print_regs 
+
     cmp al, dh
-    jne DISK_ERROR          ; 当al的数量和之前传入的dh不一致时，说明读取出错了。
+    jne DISK_ERROR_2          ; 当al的数量和之前传入的dh不一致时，说明读取出错了。
+    
     ret
 
-DISK_ERROR:
-    mov bx, DISK_ERROR_MSG
+DISK_ERROR_1:
+    mov bx, DISK_ERROR_MSG_1
     call print_string
+    jmp $
+DISK_ERROR_MSG_1:
+    db "Disk read error 1 !"
+    dw 0x0a0d,0
 
-DISK_ERROR_MSG:
-    db "Disk read error!",0
+DISK_ERROR_2:
+    mov bx, DISK_ERROR_MSG_2
+    call print_string
+    jmp $
+DISK_ERROR_MSG_2:
+    db "Disk read error 2 !"
+    dw 0x0a0d,0
