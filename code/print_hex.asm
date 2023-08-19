@@ -2,6 +2,7 @@ print_hex:
 ; dx: The orignal hex value
 
 pusha
+
 mov ax, dx
 mov bx, HEX_ADDRESS
 add bx, 5
@@ -15,7 +16,7 @@ convert:
     dec bx
     shr ax, 4
     add cx, 1
-    cmp ax, 0
+    cmp cx, 4
     jne convert
     
 jmp print_h
@@ -39,4 +40,4 @@ popa
 ret
 
 HEX_ADDRESS:
-    db '0x1200'
+    db '0x0000',0
