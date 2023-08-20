@@ -4,6 +4,8 @@
 switch_to_pm:
 ; 我们必须停用所有中断，知道我们设置好了保护模式下的 
 ; 中断向量，否则中断会造成破坏
+mov bx, MSG_START_CONVERT
+call print_string
 
 cli
 

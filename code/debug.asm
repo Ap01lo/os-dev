@@ -4,10 +4,16 @@
 ;
 
 print_regs:
+    pusha
     call print_ax
     call print_bx
     call print_cx
     call print_dx
+    mov bx, dash_msg
+    call print_string
+    mov bx, change_line
+    call print_string
+    popa
     ret
 
 print_ax:   
@@ -78,3 +84,5 @@ dx_msg:
     db "dx = ",0
 change_line:
     dw 0x0a0d,0
+dash_msg:
+    db "----------------------------------",0

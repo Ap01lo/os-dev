@@ -1,0 +1,41 @@
+define sd
+si
+disassemble *$pc, *($pc+0x2)
+info registers eax
+info registers ebx
+info registers ecx
+info registers edx
+end
+
+define ii
+print "-----General Regs-----"
+info registers eax
+info registers ebx
+info registers ecx
+info registers edx
+
+print "-----Seg Regs-----"
+info registers ds
+info registers cs
+info registers bp
+info registers sp
+end
+
+target remote localhost:1234
+
+define q1
+source gdb_init.txt
+end
+
+define q2
+source gdb_init.txt
+source gdb_init.txt
+end
+
+define xx
+x /16x $arg0
+end
+
+define dx
+disassemble /r $arg0, ($arg0+32)
+end

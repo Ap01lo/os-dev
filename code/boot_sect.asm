@@ -31,16 +31,18 @@ mov ebx, MSG_PROT_MODE
 ; 调用32-bit的输出程序
 call print_string_pm
 
-a:
-mov eax,0xaaaaaaaa
-mov ebx,0xbbbbbbbb
-mov ecx,0xcccccccc
-mov edx,0xdddddddd
-jmp a		; 一致挂载
+jmp $
+; a:
+; mov eax,0xaaaaaaaa
+; mov ebx,0xbbbbbbbb
+; mov ecx,0xcccccccc
+; mov edx,0xdddddddd
+; jmp a		; 一致挂载
 	
 ; 全局变量
 MSG_REAL_MODE db "Started in 16-bit Real Mode",0x0a,0x0d,0
-MSG_PROT_MODE db "Successfully landed in 32 Protected Mode"0x0a,0x0d,0
+MSG_PROT_MODE db "Successfully landed in 32 Protected Mode",0x0a,0x0d,0
+MSG_START_CONVERT db "Start converting to PM, watch left-top conner!",0x0a,0x0d,0
 
 times 510-($-$$) db 0
 dw 0xaa55

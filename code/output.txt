@@ -1,0 +1,104 @@
+Dump of assembler code from 0x7c00 to 0x7d10:
+   0x00007c00:	bd 00 90 89 ec     	mov    $0xec899000,%ebp
+   0x00007c05:	bb a3 7c e8 05     	mov    $0x5e87ca3,%ebx
+   0x00007c0a:	00 e8              	add    %ch,%al
+   0x00007c0c:	54                 	push   %esp
+   0x00007c0d:	00 eb              	add    %ch,%bl
+   0x00007c0f:	fe                 	(bad)
+   
+print_string:
+   0x00007c10:	60                 	pusha
+   0x00007c11:	b4 0e              	mov    $0xe,%ah
+   0x00007c13:	e8 0c 00 83 c3     	call   0xc3837c24
+   0x00007c18:	01 8a 0f 80 f9 00  	add    %ecx,0xf9800f(%edx)
+   0x00007c1e:	7f f3              	jg     0x7c13
+   0x00007c20:	eb 05              	jmp    0x7c27
+   0x00007c22:	8a 07              	mov    (%edi),%al
+   0x00007c24:	cd 10              	int    $0x10
+   0x00007c26:	c3                 	ret
+   0x00007c27:	61                 	popa
+   0x00007c28:	c3                 	ret
+
+...:
+   0x00007c29:	00 00              	add    %al,(%eax)
+   0x00007c2b:	00 00              	add    %al,(%eax)
+   0x00007c2d:	00 00              	add    %al,(%eax)
+   0x00007c2f:	00 00              	add    %al,(%eax)
+   0x00007c31:	ff                 	(bad)
+   0x00007c32:	ff 00              	incl   (%eax)
+   0x00007c34:	00 00              	add    %al,(%eax)
+   0x00007c36:	9a cf 00 ff ff 00 00	lcall  $0x0,$0xffff00cf
+   0x00007c3d:	00 93 cf 00 17 00  	add    %dl,0x1700cf(%ebx)
+   0x00007c43:	29 7c 00 00        	sub    %edi,0x0(%eax,%eax,1)
+
+print_string_pm:
+   0x00007c47:	60                 	pusha
+   0x00007c48:	ba 00 80 0b 00     	mov    $0xb8000,%edx
+   0x00007c4d:	8a 03              	mov    (%ebx),%al
+   0x00007c4f:	b4 0f              	mov    $0xf,%ah
+   0x00007c51:	3c 00              	cmp    $0x0,%al
+   0x00007c53:	74 0b              	je     0x7c60
+   0x00007c55:	66 89 02           	mov    %ax,(%edx)
+   0x00007c58:	83 c3 01           	add    $0x1,%ebx
+   0x00007c5b:	83 c2 02           	add    $0x2,%edx
+   0x00007c5e:	eb ed              	jmp    0x7c4d
+   0x00007c60:	61                 	popa
+   0x00007c61:	c3                 	ret
+
+switch_to_pm:
+   0x00007c62:	bb a3 7c e8 a8     	mov    $0xa8e87ca3,%ebx
+   0x00007c67:	ff                 	(bad)
+   0x00007c68:	fa                 	cli
+   0x00007c69:	0f 01 16           	lgdtl  (%esi)
+   0x00007c6c:	41                 	inc    %ecx
+   0x00007c6d:	7c 0f              	jl     0x7c7e
+   0x00007c6f:	20 c0              	and    %al,%al
+   0x00007c71:	66 83 c8 01        	or     $0x1,%ax
+   0x00007c75:	0f 22 c0           	mov    %eax,%cr0
+   0x00007c78:	ea 7d 7c 08 00 66 b8	ljmp   $0xb866,$0x87c7d
+   0x00007c7f:	10 00              	adc    %al,(%eax)
+   0x00007c81:	8e d8              	mov    %eax,%ds
+   0x00007c83:	8e d0              	mov    %eax,%ss
+   0x00007c85:	8e c0              	mov    %eax,%es
+   0x00007c87:	8e e0              	mov    %eax,%fs
+   0x00007c89:	8e e8              	mov    %eax,%gs
+   0x00007c8b:	bd 00 00 09 00     	mov    $0x90000,%ebp
+   0x00007c90:	89 ec              	mov    %ebp,%esp
+   0x00007c92:	e8 00 00 00 00     	call   0x7c97
+   0x00007c97:	bb c1 7c 00 00     	mov    $0x7cc1,%ebx
+   0x00007c9c:	e8 a6 ff ff ff     	call   0x7c47
+
+jmp $:
+=> 0x00007ca1:	eb fe              	jmp    0x7ca1
+
+MSG_REAL_MODE:
+   0x00007ca3:	53                 	push   %ebx
+   0x00007ca4:	74 61              	je     0x7d07
+   0x00007ca6:	72 74              	jb     0x7d1c
+   0x00007ca8:	65 64 20 69 6e     	gs and %ch,%fs:0x6e(%ecx)
+   0x00007cad:	20 31              	and    %dh,(%ecx)
+   0x00007caf:	36 2d 62 69 74 20  	ss sub $0x20746962,%eax
+   0x00007cb5:	52                 	push   %edx
+   0x00007cb6:	65 61              	gs popa
+   0x00007cb8:	6c                 	insb   (%dx),%es:(%edi)
+   0x00007cb9:	20 4d 6f           	and    %cl,0x6f(%ebp)
+   0x00007cbc:	64 65 0a 0d 00 53 75 63	fs or  %gs:0x63755300,%cl
+
+   0x00007cc4:	63 65 73           	arpl   %sp,0x73(%ebp)
+   0x00007cc7:	73 66              	jae    0x7d2f
+   0x00007cc9:	75 6c              	jne    0x7d37
+   0x00007ccb:	6c                 	insb   (%dx),%es:(%edi)
+   0x00007ccc:	79 20              	jns    0x7cee
+   0x00007cce:	6c                 	insb   (%dx),%es:(%edi)
+   0x00007ccf:	61                 	popa
+   0x00007cd0:	6e                 	outsb  %ds:(%esi),(%dx)
+   0x00007cd1:	64 65 64 20 69 6e  	fs gs and %ch,%fs:0x6e(%ecx)
+   0x00007cd7:	20 33              	and    %dh,(%ebx)
+   0x00007cd9:	32 20              	xor    (%eax),%ah
+   0x00007cdb:	50                 	push   %eax
+   0x00007cdc:	72 6f              	jb     0x7d4d
+   0x00007cde:	74 65              	je     0x7d45
+   0x00007ce0:	63 74 65 64        	arpl   %si,0x64(%ebp,%eiz,2)
+   0x00007ce4:	20 4d 6f           	and    %cl,0x6f(%ebp)
+   0x00007ce7:	64 65 0a 0d 00 00 00 00	fs or  %gs:0x0,%cl
+End of assembler dump.
